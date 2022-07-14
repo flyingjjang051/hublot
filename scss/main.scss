@@ -1,5 +1,7 @@
 @import "vars";
-
+#main {
+  z-index: 2;
+}
 .section {
   height: 100vh;
   position: relative;
@@ -44,8 +46,15 @@
   overflow: hidden;
   pointer-events: none;
   div {
-    width: 25%;
+    width: 10%;
     height: 100vh;
     background-color: #111;
   }
+}
+#bgParticle {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 }

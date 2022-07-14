@@ -19,6 +19,7 @@
     <script src="js/greensock/CSSRulePlugin.min.js"></script>
     <script src="js/splitting.min.js"></script>
     <script src="js/fullpage.min.js"></script>
+    <script src="js/particles.min.js"></script>
   </head>
   <body>
     <header id="header">
@@ -59,7 +60,14 @@
             </div>
         </div> -->
     </main>
+    <div id="bgParticle"></div>
     <div class="cover">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
       <div></div>
       <div></div>
       <div></div>
@@ -74,7 +82,7 @@
           ease: "power4",
           duration: 1,
           stagger: {
-            each: 0.15,
+            each: 0.05,
           },
           onComplete: function () {
             //alert("모션 끝");
@@ -154,6 +162,10 @@
         $(this).addClass("on").siblings().removeClass("on");
         coverTL.restart();
         return false;
+      });
+
+      particlesJS.load("bgParticle", "data/particles.json", function () {
+        //console.log("callback - particles.js config loaded");
       });
     </script>
   </body>
