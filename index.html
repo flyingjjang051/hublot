@@ -59,12 +59,42 @@
             </div>
         </div> -->
     </main>
+    <div class="cover">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
     <script>
+      let url = "bigbang";
+      const coverTL = gsap.timeline();
+      coverTL
+        .from(".cover div", {
+          y: "-100%",
+          ease: "power4",
+          duration: 1,
+          stagger: {
+            each: 0.15,
+          },
+          onComplete: function () {
+            //alert("모션 끝");
+            loadClock(`data/${url}.json`);
+          },
+        })
+        .to(".cover div", {
+          y: "100%",
+          ease: "power4.in",
+          duration: 1,
+          stagger: {
+            each: 0.15,
+            from: "end",
+          },
+        });
       const main = $("#main");
-      let selectedNum = 1;
-
-      //prettier-ignore
-      $.ajax({ url: "data/bigbang.json" })
+      function loadClock(jsonUrl) {
+        let selectedNum = 1;
+        //prettier-ignore
+        $.ajax({ url: jsonUrl })
        .done(function (response) {
           //console.log(response.clock);
           const clockArray =  response.clock;
@@ -88,23 +118,43 @@
           console.log(tempHtml);
           main.html(tempHtml);
           Splitting();
-          const clockTL = gsap.timeline({ paused: true });
-          clockTL.from(`.section:nth-child(${selectedNum}) .char`, {
-            opacity: 0,
-            y: -100,
-            ease: "bounce",
-            duration: 1,
-            stagger: { each: 0.02, from: "random" },
-          });
+          gsap.set(`.section:nth-child(${selectedNum}) .char`,{opacity:0,y:-100});
+          gsap.to(`.section:nth-child(${selectedNum}) .char`,{
+                opacity: 1,
+                y: 0,
+                ease: "bounce",
+                duration: 1,
+                stagger: { each: 0.02, from: "random" },
+              });
           $("#main").fullpage({
             scrollBar:true,
+            onLeave:function(origin,destination,direction,trigger){
+              selectedNum = destination.index+1;
+              gsap.set(`.section:nth-child(${selectedNum}) .char`,{opacity:0,y:-100});
+            },
             afterLoad:function(origin,destination,direction,trigger){
               //prettier-ignore
               selectedNum = destination.index+1;
-              clockTL.restart();
+              gsap.to(`.section:nth-child(${selectedNum}) .char`,{
+                opacity: 1,
+                y: 0,
+                ease: "bounce",
+                duration: 1,
+                stagger: { each: 0.02, from: "random" },
+              });
             }
           });
        });
+      }
+      loadClock("data/bigbang.json");
+
+      $("#gnb li").on("click", function () {
+        url = $(this).data("url");
+
+        $(this).addClass("on").siblings().removeClass("on");
+        coverTL.restart();
+        return false;
+      });
     </script>
   </body>
 </html>
