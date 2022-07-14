@@ -62,3 +62,16 @@
   left: 0;
   top: 0;
 }
+
+.pagination {
+  bottom: 100px;
+  left: 100px;
+  padding: 10px 30px;
+  background-color: #f00;
+  color: #fff;
+  text-align: center;
+  border-radius: 100px;
+  font-size: 18px;
+  font-weight: 700;
+  position: fixed;
+}
