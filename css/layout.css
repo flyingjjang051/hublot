@@ -6,7 +6,10 @@ body {
   font-family: "Roboto", "Noto Sans KR";
   font-size: 1.6rem;
   background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05) 1px, 0, transparent 5%) #333;
-  overflow: hidden !important;
+}
+
+.fp-snaps body {
+  overflow-y: hidden !important;
 }
 
 #header {

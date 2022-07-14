@@ -1,9 +1,9 @@
 .section {
   height: 100vh;
   position: relative;
-  background-position: right 200px top 50%;
+  background-position: right 100px top 50%;
   background-repeat: no-repeat;
-  background-size: 30%;
+  background-size: 40%;
   background-attachment: fixed;
 }
 .section .info {
